@@ -5,7 +5,9 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./screens/home/home.module').then((m) => m.HomeModule),
+      import('./screens/dashboard/dashboard-routing.module').then(
+        (m) => m.DashboardRoutingModule
+      ),
   },
   {
     path: 'convo',

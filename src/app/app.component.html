@@ -1,1 +1,41 @@
+<header class="h-16 px-4 border border-b-2 flex items-center justify-between">
+  <div class="logo flex items-center h-3/5">
+    <img
+      class="h-full mr-2"
+      src="../../../assets/media/icons/logo.jpg"
+      alt="logo"
+    />
+    <p style="color: #343877">Cục cảnh sát biển Việt Nam - Trang quản trị</p>
+  </div>
+  <span>Logout</span>
+</header>
+
+<div class="flex flex-col">
+  <div class="side-bar flex border-b-2">
+    <a
+      [routerLink]="['']"
+      class="flex cursor-pointer mr-10 items-center hover:text-red-600"
+    >
+      <i class="far fa-home-lg-alt mr-2"></i>
+      Dashboard
+    </a>
+
+    <a
+      [routerLink]="['/convo']"
+      class="flex cursor-pointer mr-10 items-center hover:text-red-600"
+    >
+      <i class="fal fa-comments-alt mr-2"></i>
+      Quản lý hội thoại
+    </a>
+
+    <a
+      [routerLink]="['/']"
+      class="flex cursor-pointer mr-10 items-center hover:text-red-600"
+    >
+      <i class="far fa-user-chart mr-2"></i>
+      Quản lý khách hàng
+    </a>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
