@@ -1,7 +1,29 @@
-<div class="sign-in">
-  <form action="">
-    <input type="text" />
-    <input type="password" name="" id="" />
-    <button type="submit"></button>
+<div class="sign-in flex flex-col h-screen items-center justify-center">
+  <img
+    class="mb-2 h-24"
+    src="../../../assets/media/icons/logo.jpg"
+    alt="logo"
+  />
+
+  <form class="flex flex-col" action="">
+    <input
+      placeholder="Tài khoản admin"
+      class="mb-2 border px-2 py-1 rounded-sm"
+      type="text"
+    />
+    <input
+      placeholder="Mật khẩu"
+      class="mb-2 border px-2 py-1 rounded-sm"
+      type="password"
+      name=""
+      id=""
+    />
+    <button
+      (click)="signIn()"
+      class="text-white bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded-sm"
+      type="submit"
+    >
+      Đăng nhập
+    </button>
   </form>
 </div>
