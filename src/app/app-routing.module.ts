@@ -1,10 +1,51 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./screens/home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: 'convo',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./screens/convo-list/convo-list.module').then(
+            (m) => m.ConvoListModule
+          ),
+      },
+      {
+        path: ':convoId',
+        loadChildren: () =>
+          import('./screens/convo-detail/convo-detail.module').then(
+            (m) => m.ConvoDetailModule
+          ),
+      },
+      {
+        path: 'create',
+        loadChildren: () =>
+          import('./screens/convo-modify/convo-modify.module').then(
+            (m) => m.ConvoModifyModule
+          ),
+      },
+    ],
+  },
+  {
+    path: 'sign-in',
+    loadChildren: () =>
+      import('./screens/sign-in/sign-in.module').then((m) => m.SignInModule),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
