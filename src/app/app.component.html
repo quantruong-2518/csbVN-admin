@@ -2,7 +2,7 @@
   <div class="logo flex items-center h-3/5">
     <img
       class="h-full mr-2"
-      src="../../../assets/media/icons/logo.jpg"
+      src="../../../assets/media/icons/logo.png"
       alt="logo"
     />
     <p style="color: #343877">Cục cảnh sát biển Việt Nam - Trang quản trị</p>
@@ -13,6 +13,7 @@
 <div class="flex flex-col">
   <div class="side-bar flex border-b-2">
     <a
+      [class]="getCurrentRoute() === '/' ? 'text-red-700' : null"
       [routerLink]="['']"
       class="flex cursor-pointer mr-10 items-center hover:text-red-600"
     >
@@ -21,7 +22,8 @@
     </a>
 
     <a
-      [routerLink]="['/convo']"
+      [class]="getCurrentRoute() === '/convo' ? 'text-red-700' : null"
+      [routerLink]="['convo']"
       class="flex cursor-pointer mr-10 items-center hover:text-red-600"
     >
       <i class="fal fa-comments-alt mr-2"></i>
@@ -29,7 +31,17 @@
     </a>
 
     <a
-      [routerLink]="['/']"
+      [class]="getCurrentRoute() === '/question' ? 'text-red-700' : null"
+      [routerLink]="['question']"
+      class="flex cursor-pointer mr-10 items-center hover:text-red-600"
+    >
+      <i class="fa fa-question mr-2" aria-hidden="true"></i>
+      Quản lý câu hỏi
+    </a>
+
+    <a
+      [class]="getCurrentRoute() === '/guest' ? 'text-red-700' : null"
+      [routerLink]="['guest']"
       class="flex cursor-pointer mr-10 items-center hover:text-red-600"
     >
       <i class="far fa-user-chart mr-2"></i>

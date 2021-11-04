@@ -1,0 +1,96 @@
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { QuestionService } from 'src/app/services/question.service';
+
+import * as XLSX from 'xlsx';
+
+@Component({
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.scss'],
+})
+export class QuestionComponent implements OnInit {
+  incomingData: any = [];
+  currentPage: number = 1;
+  questions: any;
+  pageSize = 10;
+  total = 0;
+
+  private _subscription = new Subscription();
+
+  constructor(private _questionService: QuestionService) {}
+
+  ngOnInit(): void {
+    this.getQuestions();
+  }
+
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
+
+  getQuestions() {
+    this._subscription.add(
+      this._questionService.getQuestions().subscribe((questions) => {
+        const { items, total } = questions.data;
+        this.questions = items;
+        this.total = total;
+      })
+    );
+  }
+
+  changePage(page: number) {
+    this._subscription.add(
+      this._questionService.getQuestions(page).subscribe((questions) => {
+        const { items } = questions.data;
+        this.questions = items;
+      })
+    );
+
+    this.currentPage = page;
+  }
+
+  onFileChange(event: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>event.target;
+    if (target.files.length !== 1) {
+      throw new Error('Cannot use multiple files');
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsBinaryString(target.files[0]);
+    reader.onload = (e: any) => {
+      /* create workbook */
+      const binarystr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+
+      /* selected the sheet what contain Questions */
+      const wsname: string = wb.SheetNames[2];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      const data = XLSX.utils.sheet_to_json(ws) as any; // to get 2d array pass 2nd parameter as object {header: 1}
+
+      this.incomingData = data.map((row) => {
+        return { ...row, answers: [{ content: row.answers?.toString() }] };
+      });
+
+      if (this.incomingData) {
+        const cfBox = confirm(
+          'Bạn có muốn tạo mới các câu hỏi bằng cách nhập file Excel này?'
+        );
+
+        if (cfBox) {
+          this._subscription.add(
+            this._questionService
+              .createQuestion(this.incomingData, true)
+              .subscribe(
+                (res) => alert('Questions were created'),
+                (err) => console.log('aaaaaa', err)
+              )
+          );
+        }
+      }
+    };
+  }
+
+  uploadXLSX() {}
+}

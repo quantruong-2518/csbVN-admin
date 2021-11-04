@@ -8,3 +8,17 @@ html,
 body {
   font-family: "Raleway", sans-serif;
 }
+
+::ng-deep pagination-controls {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  box-shadow: 1px 1px 5px #888;
+  border-radius: 5px;
+
+  > pagination-template > .ngx-pagination {
+    margin: 0;
+  }
+}

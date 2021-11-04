@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  domain_V1: 'https://trueoutsourcing.com/api/v1',
 };

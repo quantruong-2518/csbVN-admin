@@ -20,25 +20,39 @@ const routes: Routes = [
           ),
       },
       {
-        path: ':convoId',
-        loadChildren: () =>
-          import('./screens/convo-detail/convo-detail.module').then(
-            (m) => m.ConvoDetailModule
-          ),
-      },
-      {
         path: 'create',
         loadChildren: () =>
           import('./screens/convo-modify/convo-modify.module').then(
             (m) => m.ConvoModifyModule
           ),
       },
+      {
+        path: ':convoId',
+        loadChildren: () =>
+          import('./screens/convo-detail/convo-detail.module').then(
+            (m) => m.ConvoDetailModule
+          ),
+      },
     ],
+  },
+  {
+    path: 'question',
+    loadChildren: () =>
+      import('./screens/question/question.module').then(
+        (m) => m.QuestionModule
+      ),
   },
   {
     path: 'sign-in',
     loadChildren: () =>
       import('./screens/sign-in/sign-in.module').then((m) => m.SignInModule),
+  },
+  {
+    path: 'guest',
+    loadChildren: () =>
+      import('./screens/guest/guest-routing.module').then(
+        (m) => m.GuestRoutingModule
+      ),
   },
   {
     path: '**',
