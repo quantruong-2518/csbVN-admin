@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuestionService } from 'src/app/services/question.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import * as XLSX from 'xlsx';
 
@@ -18,9 +19,13 @@ export class QuestionComponent implements OnInit {
 
   private _subscription = new Subscription();
 
-  constructor(private _questionService: QuestionService) {}
+  constructor(
+    private _questionService: QuestionService,
+    private _spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
+    this._spinner.show();
     this.getQuestions();
   }
 
@@ -31,6 +36,7 @@ export class QuestionComponent implements OnInit {
   getQuestions() {
     this._subscription.add(
       this._questionService.getQuestions().subscribe((questions) => {
+        this._spinner.hide();
         const { items, total } = questions.data;
         this.questions = items;
         this.total = total;
@@ -39,8 +45,9 @@ export class QuestionComponent implements OnInit {
   }
 
   changePage(page: number) {
+    const reqPage = page - 1;
     this._subscription.add(
-      this._questionService.getQuestions(page).subscribe((questions) => {
+      this._questionService.getQuestions(reqPage).subscribe((questions) => {
         const { items } = questions.data;
         this.questions = items;
       })

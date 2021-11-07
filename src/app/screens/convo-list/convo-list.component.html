@@ -1,3 +1,12 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-beat"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="flex flex-col p-4">
   <div class="flex items-center justify-between mb-4">
@@ -39,7 +48,7 @@
                   tracking-wider
                 "
               >
-                Name
+                Guest Name
               </th>
               <th
                 scope="col"
@@ -53,7 +62,7 @@
                   tracking-wider
                 "
               >
-                Title
+                Date
               </th>
               <th
                 scope="col"
@@ -81,7 +90,7 @@
                   tracking-wider
                 "
               >
-                Role
+                Messages
               </th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Detail</span>
@@ -91,7 +100,7 @@
           <tbody class="bg-white divide-y divide-gray-200">
             <tr
               *ngFor="
-                let item of items
+                let convo of conversations
                   | paginate
                     : {
                         itemsPerPage: pageSize,
@@ -101,30 +110,17 @@
               "
             >
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 h-10 w-10">
-                    <img
-                      class="h-10 w-10 rounded-full"
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                      alt=""
-                    />
-                  </div>
-                  <div class="ml-4">
-                    <div class="text-sm font-medium text-gray-900">
-                      Jane Cooper
-                    </div>
-                    <div class="text-sm text-gray-500">
-                      jane.cooper@example.com
-                    </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">
+                    {{ convo.guest?.fullname || "" }}
                   </div>
                 </div>
               </td>
 
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
-                  Regional Paradigm Technician
+                  {{ convo.createdAt | date: "short" }}
                 </div>
-                <div class="text-sm text-gray-500">Optimization</div>
               </td>
 
               <td class="px-6 py-4 whitespace-nowrap">
@@ -136,19 +132,23 @@
                     leading-5
                     font-semibold
                     rounded-full
-                    bg-green-100
-                    text-green-800
+                  "
+                  [class]="
+                    convo.status
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-red-100 text-red-800'
                   "
                 >
-                  Active
+                  {{ convo.status ? "Active" : "Inactive" }}
                 </span>
               </td>
 
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Admin
+                {{ convo.messages?.length }}
               </td>
 
               <td
+                *ngIf="convo.messages?.length"
                 class="
                   px-6
                   py-4
@@ -173,4 +173,7 @@
   </div>
 </div>
 
-<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+<pagination-controls
+  *ngIf="conversations?.length"
+  (pageChange)="changePage($event)"
+></pagination-controls>

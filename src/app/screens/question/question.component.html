@@ -1,3 +1,12 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-beat"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+
 <div class="questions">
   <!-- UPLOADER  -->
   <div class="uploader p-4 flex items-center justify-between">
@@ -18,7 +27,10 @@
   </div>
 
   <!-- TABLE  -->
-  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+  <div
+    *ngIf="questions.length; else questionNotFound"
+    class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
+  >
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div
         class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
@@ -131,6 +143,10 @@
       </div>
     </div>
   </div>
+  <ng-template #questionNotFound> Question not found </ng-template>
 </div>
 
-<pagination-controls (pageChange)="changePage($event)"></pagination-controls>
+<pagination-controls
+  *ngIf="questions?.length"
+  (pageChange)="changePage($event)"
+></pagination-controls>

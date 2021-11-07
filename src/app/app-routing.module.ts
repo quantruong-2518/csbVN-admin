@@ -11,29 +11,10 @@ const routes: Routes = [
   },
   {
     path: 'convo',
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./screens/convo-list/convo-list.module').then(
-            (m) => m.ConvoListModule
-          ),
-      },
-      {
-        path: 'create',
-        loadChildren: () =>
-          import('./screens/convo-modify/convo-modify.module').then(
-            (m) => m.ConvoModifyModule
-          ),
-      },
-      {
-        path: ':convoId',
-        loadChildren: () =>
-          import('./screens/convo-detail/convo-detail.module').then(
-            (m) => m.ConvoDetailModule
-          ),
-      },
-    ],
+    loadChildren: () =>
+      import('./screens/convo-list/convo-list.module').then(
+        (m) => m.ConvoListModule
+      ),
   },
   {
     path: 'question',
