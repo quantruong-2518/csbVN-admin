@@ -16,4 +16,10 @@ export class ConvoService {
       `https://trueoutsourcing.com/api/v1/conversations?page=${page}&paging=${paging}`
     );
   }
+
+  getConversationById(convoId: string): Observable<any> {
+    return this._http.get(
+      `https://trueoutsourcing.com/api/v1/conversations/${convoId}`
+    );
+  }
 }

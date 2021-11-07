@@ -9,6 +9,10 @@ body {
   font-family: "Raleway", sans-serif;
 }
 
+input {
+  outline: none !important;
+}
+
 ::ng-deep pagination-controls {
   position: fixed;
   bottom: 1rem;

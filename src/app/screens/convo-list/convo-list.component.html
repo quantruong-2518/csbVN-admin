@@ -48,7 +48,7 @@
                   tracking-wider
                 "
               >
-                Guest Name
+                Khách hàng
               </th>
               <th
                 scope="col"
@@ -62,7 +62,7 @@
                   tracking-wider
                 "
               >
-                Date
+                Ngày tạo
               </th>
               <th
                 scope="col"
@@ -76,7 +76,7 @@
                   tracking-wider
                 "
               >
-                Status
+                Trạng thái
               </th>
               <th
                 scope="col"
@@ -90,10 +90,10 @@
                   tracking-wider
                 "
               >
-                Messages
+                Số tin nhắn
               </th>
               <th scope="col" class="relative px-6 py-3">
-                <span class="sr-only">Detail</span>
+                <span class="sr-only">Chi tiết</span>
               </th>
             </tr>
           </thead>
@@ -158,7 +158,7 @@
                 "
               >
                 <a
-                  [routerLink]="['/convo/12']"
+                  [routerLink]="['/convo', convo._id]"
                   class="text-indigo-600 hover:text-indigo-900"
                   >Detail</a
                 >

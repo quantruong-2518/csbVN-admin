@@ -1,15 +1,16 @@
-<ngx-spinner
+<!-- <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"
   size="medium"
   color="#fff"
   type="ball-beat"
   [fullScreen]="true"
   ><p style="color: white">Loading...</p></ngx-spinner
->
+> -->
 
 <div class="questions">
   <!-- UPLOADER  -->
-  <div class="uploader p-4 flex items-center justify-between">
+  <div class="uploader p-4">
+    <label class="mr-2 ml-auto" for="">Thêm nhiều câu hỏi từ excel</label>
     <input
       type="file"
       style="display: inline-block"
@@ -18,17 +19,17 @@
       accept=".xlsx"
     />
 
-    <button
+    <!-- <button
       type="button"
       class="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-sm text-white"
     >
       Add new questions
-    </button>
+    </button> -->
   </div>
 
   <!-- TABLE  -->
   <div
-    *ngIf="questions.length; else questionNotFound"
+    *ngIf="questions?.length; else questionNotFound"
     class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
   >
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -51,7 +52,7 @@
                   tracking-wider
                 "
               >
-                Title
+                Câu hỏi
               </th>
               <th
                 scope="col"
@@ -66,7 +67,7 @@
                   tracking-wider
                 "
               >
-                Status
+                Trạng thái
               </th>
               <th
                 scope="col"
@@ -81,10 +82,10 @@
                   tracking-wider
                 "
               >
-                Answer
+                Câu trả lời
               </th>
               <th scope="col" class="relative px-6 py-3">
-                <span class="sr-only">Detail</span>
+                <span class="sr-only">Chi tiết </span>
               </th>
             </tr>
           </thead>
@@ -132,7 +133,7 @@
                 <a
                   [routerLink]="['/convo/12']"
                   class="text-indigo-600 hover:text-indigo-900"
-                  >Detail</a
+                  >Chi tiết</a
                 >
               </td>
             </tr>

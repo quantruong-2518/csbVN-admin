@@ -1,1 +1,60 @@
-<p>convo-detail works!</p>
+<div class="conversation flex py-4 px-16">
+  <!-- CHAT BOX  -->
+  <div
+    class="
+      chat-box
+      flex flex-col
+      w-3/4
+      border
+      rounded-md
+      justify-between
+      p-4
+      mr-4
+    "
+  >
+    <div class="chatting-screen border rounded-md p-4 mb-2">
+      <div
+        *ngFor="let mes of messages; index as i; trackBy: trackByIndex"
+        [class]="mes.isGuestReply ? 'guest-message' : 'admin-message'"
+      >
+        {{ mes.content }}
+      </div>
+    </div>
+    <div class="chatting-bar border-t-2 px-4 py-2 flex justify-between">
+      <input class="py-2" type="text" placeholder="Say something..." />
+      <button>Send</button>
+    </div>
+  </div>
+
+  <!-- GUEST INFORMATION  -->
+  <div class="guest-info w-2/6 flex flex-col">
+    <div class="p-4 mb-3 border rounded-md">
+      <h3 class="mb-2">
+        Khách hàng: <b>{{ guest?.fullname }}</b>
+      </h3>
+      <div class="mb-2">
+        <label for="email">Email: </label>
+        <span email> {{ guest?.email }} </span>
+      </div>
+      <div class="mb-2">
+        <label for="phone">Số điện thoại: </label>
+        <span>{{ guest?.phone }}</span>
+      </div>
+    </div>
+
+    <div class="p-4 border rounded-md">
+      <div class="mb-2">
+        <label for="createdAt">Ngày bắt đầu: </label>
+        <span #createdAt>{{ data?.createdAt | date: "short" }}</span>
+      </div>
+      <div class="mb-2">
+        <label for="updatedAt">Lần trao đổi gần nhất: </label>
+        <span #updatedAt>{{ data?.updatedAt | date: "short" }}</span>
+      </div>
+      <div class="mb-2">
+        <label for="messageQuantity">Tổng số tin nhắn: </label>
+        <span #messageQuantity>{{ messages?.length }}</span>
+      </div>
+    </div>
+  </div>
+</div>

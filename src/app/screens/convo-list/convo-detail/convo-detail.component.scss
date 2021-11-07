@@ -1,0 +1,36 @@
+.conversation {
+  .chat-box {
+    height: 540px;
+    position: relative;
+
+    .chatting-screen {
+      height: 450px;
+      overflow: auto;
+
+      div + div {
+        margin-top: 1rem;
+      }
+    }
+
+    .chating-bar {
+    }
+  }
+}
+
+.admin-message,
+.guest-message {
+  padding: 1rem;
+  border-radius: 7px;
+  max-width: 55%;
+}
+
+.guest-message {
+  margin-left: auto;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #000 !important;
+}
+
+.admin-message {
+  background-color: #0a7cff;
+  color: white;
+}
