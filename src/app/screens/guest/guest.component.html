@@ -1,1 +1,114 @@
-<p>guest works!</p>
+<div class="p-4 mt-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+  <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              class="
+                px-6
+                py-3
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
+            >
+              Khách hàng
+            </th>
+            <th
+              scope="col"
+              class="
+                px-6
+                py-3
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
+            >
+              Số điện thoại
+            </th>
+            <th
+              scope="col"
+              class="
+                px-6
+                py-3
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
+            >
+              Email
+            </th>
+            <th
+              scope="col"
+              class="
+                px-6
+                py-3
+                text-left text-xs
+                font-medium
+                text-gray-500
+                uppercase
+                tracking-wider
+              "
+            >
+              Ngày tạo
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr
+            *ngFor="
+              let guest of guests
+                | paginate
+                  : {
+                      itemsPerPage: pageSize,
+                      currentPage: currentPage,
+                      totalItems: total
+                    }
+            "
+          >
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900">
+                  {{ guest?.fullname || "" }}
+                </div>
+              </div>
+            </td>
+
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">
+                {{ guest?.phone }}
+              </div>
+            </td>
+
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">
+                {{ guest?.email }}
+              </div>
+            </td>
+
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">
+                {{ guest?.createdAt | date: "short" }}
+              </div>
+            </td>
+          </tr>
+
+          <!-- More people... -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<pagination-controls
+  *ngIf="guests?.length"
+  (pageChange)="changePage($event)"
+></pagination-controls>

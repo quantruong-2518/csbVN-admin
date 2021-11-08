@@ -31,9 +31,7 @@ const routes: Routes = [
   {
     path: 'guest',
     loadChildren: () =>
-      import('./screens/guest/guest-routing.module').then(
-        (m) => m.GuestRoutingModule
-      ),
+      import('./screens/guest/guest.module').then((m) => m.GuestModule),
   },
   {
     path: '**',

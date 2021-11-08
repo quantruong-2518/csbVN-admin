@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,17 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'csbVN-admin';
+  showHeader = true;
 
   constructor(private _router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        if (this._router.url === '/sign-in') this.showHeader = false;
+      }
+    });
+  }
 
   getCurrentRoute(): string {
     return this._router.url;

@@ -10,12 +10,12 @@
 <div class="questions">
   <!-- UPLOADER  -->
   <div class="uploader p-4">
-    <label class="mr-2 ml-auto" for="">Thêm nhiều câu hỏi từ excel</label>
     <input
+      #uploader
       type="file"
       style="display: inline-block"
       (change)="onFileChange($event)"
-      placeholder="Upload file"
+      placeholder="Thêm nhiều câu hỏi từ excel"
       accept=".xlsx"
     />
 
@@ -123,7 +123,7 @@
                       : 'bg-red-100 text-red-800'
                   "
                 >
-                  {{ question.status === 1 ? "Hoạt động" : "Không hoạt động" }}
+                  {{ question.status === 1 ? "Hoạt động" : "Đã kết thúc" }}
                 </span>
               </td>
 

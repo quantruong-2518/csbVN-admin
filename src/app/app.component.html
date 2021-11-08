@@ -1,4 +1,7 @@
-<header class="h-16 px-4 border border-b-2 flex items-center justify-between">
+<header
+  *ngIf="showHeader"
+  class="h-16 px-4 border border-b-2 flex items-center justify-between"
+>
   <div class="logo flex items-center h-3/5">
     <img
       class="h-full mr-2"
@@ -7,10 +10,12 @@
     />
     <p style="color: #343877">Cục cảnh sát biển Việt Nam - Trang quản trị</p>
   </div>
-  <span>Đăng xuất</span>
+  <a [routerLink]="['/sign-in']" routerLinkActive="router-link-active"
+    >Đăng xuất</a
+  >
 </header>
 
-<div class="flex flex-col">
+<div *ngIf="showHeader" class="flex flex-col">
   <div class="side-bar flex border-b-2">
     <a
       [class]="getCurrentRoute() === '/' ? 'text-red-700' : null"

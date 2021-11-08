@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuestionService } from 'src/app/services/question.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,8 +16,11 @@ export class QuestionComponent implements OnInit {
   questions: any;
   pageSize = 10;
   total = 0;
+  uploaderInput = '';
 
   private _subscription = new Subscription();
+
+  @ViewChild('uploader', { static: false }) myInputVariable: ElementRef;
 
   constructor(
     private _questionService: QuestionService,
@@ -70,14 +73,18 @@ export class QuestionComponent implements OnInit {
       const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
 
       /* selected the sheet what contain Questions */
-      const wsname: string = wb.SheetNames[2];
+      const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
       /* save data */
       const data = XLSX.utils.sheet_to_json(ws) as any; // to get 2d array pass 2nd parameter as object {header: 1}
 
       this.incomingData = data.map((row) => {
-        return { ...row, answers: [{ content: row.answers?.toString() }] };
+        return {
+          ...row,
+          status: 1,
+          answers: [{ content: row.answers?.toString() }],
+        };
       });
 
       if (this.incomingData) {
@@ -86,11 +93,17 @@ export class QuestionComponent implements OnInit {
         );
 
         if (cfBox) {
+          this.questions = [];
+          this.myInputVariable.nativeElement.value = '';
+
           this._subscription.add(
             this._questionService
               .createQuestion(this.incomingData, true)
               .subscribe(
-                (res) => alert('Questions were created'),
+                (res) => {
+                  alert('Questions were created');
+                  this.questions = this.incomingData;
+                },
                 (err) => console.log('aaaaaa', err)
               )
           );

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,11 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
-  constructor(private _route: Router) {}
+  username = '';
+  password = '';
+
+  constructor(private _route: Router, private _auth: AuthService) {}
 
   ngOnInit(): void {}
 
   signIn() {
+    const admin = {
+      username: this.username,
+      password: this.password,
+    };
+
+    // this._auth.signIn(admin).subscribe((res) => {
+    //   alert('Dang nhap thanh cong');
+    // });
+
     this._route.navigate(['']);
   }
 }

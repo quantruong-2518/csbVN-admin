@@ -1,22 +1,24 @@
 <div class="sign-in flex flex-col h-screen items-center justify-center">
   <img
     class="mb-2 h-24"
-    src="../../../assets/media/icons/logo.jpg"
+    src="../../../assets/media/icons/logo.png"
     alt="logo"
   />
 
-  <form class="flex flex-col" action="">
+  <form #f="ngForm" class="flex flex-col" action="">
     <input
       placeholder="Tài khoản admin"
       class="mb-2 border px-2 py-1 rounded-sm"
       type="text"
+      [(ngModel)]="username"
+      name="username"
     />
     <input
       placeholder="Mật khẩu"
       class="mb-2 border px-2 py-1 rounded-sm"
       type="password"
-      name=""
-      id=""
+      [(ngModel)]="password"
+      name="password"
     />
     <button
       (click)="signIn()"
