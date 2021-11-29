@@ -1,0 +1,43 @@
+.bad-words__screen {
+  padding: 1rem;
+
+  .search-bar {
+    margin: 0 1rem 1rem 0;
+
+    > button {
+      width: 30px;
+      height: 30px;
+      background-color: #e5e7eb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover { 
+        background-color: #c6cbd5;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .words {
+    display: flex;
+    flex-wrap: wrap;
+
+    .word {
+      width: max-content;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #e4e4e4;
+      margin: 5px;
+
+      .content {
+        margin-right: 10px;
+      }
+
+      .btn-cancel {
+        background-color: gray;
+      }
+    }
+  }
+}

@@ -6,7 +6,6 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { ConvoService } from 'src/app/services/convo.service';
 import { ConvoDetailComponent } from './convo-detail/convo-detail.component';
 
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [ConvoListComponent, ConvoDetailComponent],
@@ -14,7 +13,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CommonModule,
     ConvoListRoutingModule,
     NgxPaginationModule,
-    NgxSpinnerModule,
   ],
   exports: [ConvoListComponent],
   providers: [ConvoService],

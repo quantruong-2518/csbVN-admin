@@ -34,6 +34,20 @@ const routes: Routes = [
       import('./screens/guest/guest.module').then((m) => m.GuestModule),
   },
   {
+    path: 'bad-word',
+    loadChildren: () =>
+      import('./screens/bad-words/bad-words.module').then(
+        (m) => m.BadWordsModule
+      ),
+  },
+  {
+    path: 'suggest-question',
+    loadChildren: () =>
+      import('./screens/suggest-question/suggest-question.module').then(
+        (m) => m.SuggestQuestionModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

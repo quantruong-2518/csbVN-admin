@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuestionService } from 'src/app/services/question.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 import * as XLSX from 'xlsx';
 
@@ -22,13 +21,9 @@ export class QuestionComponent implements OnInit {
 
   @ViewChild('uploader', { static: false }) myInputVariable: ElementRef;
 
-  constructor(
-    private _questionService: QuestionService,
-    private _spinner: NgxSpinnerService
-  ) {}
+  constructor(private _questionService: QuestionService) {}
 
   ngOnInit(): void {
-    this._spinner.show();
     this.getQuestions();
   }
 
@@ -39,7 +34,6 @@ export class QuestionComponent implements OnInit {
   getQuestions() {
     this._subscription.add(
       this._questionService.getQuestions().subscribe((questions) => {
-        this._spinner.hide();
         const { items, total } = questions.data;
         this.questions = items;
         this.total = total;

@@ -1,0 +1,27 @@
+<div class="bad-words__screen">
+  <div
+    class="search-bar px-4 py-2 border rounded-md flex items-center max-w-max"
+  >
+    <input
+      type="text"
+      placeholder="Chặn từ nhạy cảm"
+      [(ngModel)]="currentBadWord"
+      class="outline-none mr-2"
+      (keyup.enter)="blockBadWord($event.target.value)"
+    />
+
+    <button (click)="blockBadWord(currentBadWord)">
+      <i aria-hidden="true" class="fa fa-plus"></i>
+    </button>
+  </div>
+
+  <div class="words">
+    <!-- tags  -->
+    <div *ngFor="let word of badWords" class="word">
+      <span class="content">{{ word.title }}</span>
+      <button (click)="removeBadWord(word._id)">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+</div>

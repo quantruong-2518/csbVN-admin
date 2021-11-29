@@ -21,10 +21,12 @@ export class SignInComponent implements OnInit {
       password: this.password,
     };
 
-    // this._auth.signIn(admin).subscribe((res) => {
-    //   alert('Dang nhap thanh cong');
-    // });
+    this._auth.signIn(admin).subscribe((res) => {
+      alert('Dang nhap thanh cong');
+      const aToken = res.data.accessToken;
+      localStorage.setItem('access_token', aToken)
+      this._route.navigate(['']);
+    });
 
-    this._route.navigate(['']);
   }
 }

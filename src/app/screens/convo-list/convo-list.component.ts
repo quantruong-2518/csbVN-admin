@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConvoService } from 'src/app/services/convo.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'convo-list',
@@ -16,14 +15,10 @@ export class ConvoListComponent implements OnInit {
 
   private _subscription = new Subscription();
 
-  constructor(
-    private _convoService: ConvoService,
-    private _spinner: NgxSpinnerService
-  ) {}
+  constructor(private _convoService: ConvoService) {}
 
   ngOnInit(): void {
     this.getConversations();
-    this._spinner.show();
   }
 
   ngOnDestroy() {
@@ -33,7 +28,6 @@ export class ConvoListComponent implements OnInit {
   getConversations() {
     this._subscription.add(
       this._convoService.getConversations().subscribe(({ data }) => {
-        this._spinner.hide();
         this.conversations = data.items;
         this.total = data.total;
       })

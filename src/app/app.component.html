@@ -10,7 +10,7 @@
     />
     <p style="color: #343877">Cục cảnh sát biển Việt Nam - Trang quản trị</p>
   </div>
-  <a [routerLink]="['/sign-in']" routerLinkActive="router-link-active"
+  <a (click)="signOut()" [routerLink]="['/sign-in']" routerLinkActive="router-link-active"
     >Đăng xuất</a
   >
 </header>
@@ -51,6 +51,26 @@
     >
       <i class="far fa-user-chart mr-2"></i>
       Quản lý khách hàng
+    </a>
+
+    <a
+      [class]="getCurrentRoute() === '/bad-word' ? 'text-red-700' : null"
+      [routerLink]="['bad-word']"
+      class="flex cursor-pointer mr-10 items-center hover:text-red-600"
+    >
+      <i class="fas fa-eye-slash mr-2"></i>
+      Quản lý từ nhạy cảm
+    </a>
+
+    <a
+      [class]="
+        getCurrentRoute() === '/suggest-question' ? 'text-red-700' : null
+      "
+      [routerLink]="['suggest-question']"
+      class="flex cursor-pointer mr-10 items-center hover:text-red-600"
+    >
+      <i class="fa fa-list mr-2" aria-hidden="true"></i>
+      Quản lý đề suất
     </a>
   </div>
 </div>
