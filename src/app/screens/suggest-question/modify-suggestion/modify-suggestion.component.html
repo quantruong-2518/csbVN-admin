@@ -28,7 +28,7 @@
     <!-- TAB: IMAGE  -->
     <div class="tabs-content" [ngSwitch]="currentTab">
       <div *ngSwitchCase="'image'" class="tab select-image">
-        <div class="my-6 text-2xl">Chọn thumbnail của card</div>
+        <div class="my-6 text-2xl">Chọn ảnh nền của thẻ</div>
         <div class="imgs flex flex-wrap">
           <img
             class="w-80 h-60 object-cover rounded-md my-4 mr-4"
@@ -141,6 +141,11 @@
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </div>
+          <small class="text-red-500 mb-4 mt-2"
+            ><em>
+              ( Vui lòng chọn các câu hỏi sau đó mới bấm "Thêm câu hỏi" )
+            </em></small
+          >
 
           <div
             *ngIf="matchedQuestions.length; else questionNotFound"
@@ -162,7 +167,7 @@
 
           <button
             *ngIf="matchedQuestions.length"
-            class="py-2 px-4 bg-gray-400 rounded-md self-end"
+            class="py-2 px-4 bg-gray-300 rounded-md self-end"
             (click)="addQuestionToTopic(currentTopic)"
           >
             Thêm câu hỏi

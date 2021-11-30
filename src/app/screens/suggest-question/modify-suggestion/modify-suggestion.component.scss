@@ -57,7 +57,14 @@
           border: 1px solid #cfcfcf;
           padding: 0.5rem 1rem;
           border-radius: 5px;
-          margin-bottom: 1rem;
+
+          > input {
+            width: 85%;
+          }
+        }
+
+        > small {
+          text-align: end;
         }
 
         > .question-container {

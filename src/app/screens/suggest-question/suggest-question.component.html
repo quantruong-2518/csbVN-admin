@@ -1,4 +1,11 @@
 <div class="p-4">
+  <a
+    class="py-2 px-4 bg-blue-500 text-white rounded-md"
+    [routerLink]="['/suggest-question/create']"
+  >
+    Tạo thẻ mới</a
+  >
+
   <div class="my-6 text-2xl">Luật cảnh sát biển Việt Nam</div>
   <div class="carousel">
     <div class="card" *ngFor="let car1 of carousel1">
@@ -8,7 +15,37 @@
         alt=""
       />
       <div class="m-2" *ngFor="let top1 of car1.topics">{{ top1.content }}</div>
-      <button>Sửa card này</button>
+      <div class="actions" class="flex">
+        <a
+          class="
+            update
+            px-2
+            py-4
+            w-1/2
+            bg-gray-300
+            hover:bg-gray-400
+            text-center
+            cursor-pointer
+          "
+        >
+          Sửa
+        </a>
+        <button
+          (click)="removeCard(1, car1._id)"
+          class="
+            remove
+            px-2
+            py-4
+            w-1/2
+            bg-red-500
+            hover:bg-red-600
+            text-white text-center
+            cursor-pointer
+          "
+        >
+          Xoá
+        </button>
+      </div>
     </div>
   </div>
 
@@ -21,7 +58,28 @@
         alt=""
       />
       <div class="m-2" *ngFor="let top2 of car2.topics">{{ top2.content }}</div>
-      <button>Sửa card này</button>
+      <div class="actions" class="flex">
+        <a
+          class="
+            update
+            px-1
+            py-4
+            w-1/2
+            bg-gray-300
+            hover:bg-gray-400
+            text-center
+            cursor-pointer
+          "
+        >
+          Sửa
+        </a>
+        <button
+          (click)="removeCard(2, car2._id)"
+          class="remove px-1 py-4 w-1/2 bg-red-500 hover:bg-red-600 text-white"
+        >
+          Xoá
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -17,4 +17,8 @@ export class SuggestionQuestionService {
   getImages(): Observable<any> {
     return this._http.get(`https://trueoutsourcing.com/api/v1/cards/images`);
   }
+
+  removeCard(id: string): Observable<any> {
+    return this._http.delete(`https://trueoutsourcing.com/api/v1/cards/${id}`);
+  }
 }

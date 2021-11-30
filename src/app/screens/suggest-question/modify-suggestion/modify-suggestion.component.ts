@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 import {
@@ -42,7 +43,8 @@ export class ModifySuggestionComponent implements OnInit {
 
   constructor(
     private readonly _sqService: SuggestionQuestionService,
-    private readonly _qService: QuestionService
+    private readonly _qService: QuestionService,
+    private readonly _route: Router
   ) {
     this._subscription.add(
       this.keyChanged$
@@ -134,7 +136,7 @@ export class ModifySuggestionComponent implements OnInit {
   submitCard() {
     this._subscription.add(
       this._qService.createCard(this.card).subscribe((card) => {
-        console.log(card);
+        this._route.navigate(['suggest-question']);
       })
     );
   }

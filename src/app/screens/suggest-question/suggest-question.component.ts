@@ -23,4 +23,21 @@ export class SuggestQuestionComponent implements OnInit {
       .getCardOfCarousel(2)
       .subscribe((crs) => (this.carousel2 = crs.data));
   }
+
+  removeCard(carouselIndex: number, removedCardId: string) {
+    const result = confirm('Bạn có thực sự muốn xoá thẻ này');
+
+    if (result) {
+      this._sqService.removeCard(removedCardId).subscribe((e) => {
+        if (carouselIndex === 1) {
+          this.carousel1 = this.carousel1.filter(
+            (card) => card._id !== removedCardId
+          );
+        } else
+          this.carousel2 = this.carousel2.filter(
+            (card) => card._id !== removedCardId
+          );
+      });
+    }
+  }
 }
