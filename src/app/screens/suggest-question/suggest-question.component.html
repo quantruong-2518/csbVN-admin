@@ -1,3 +1,27 @@
 <div class="p-4">
-  <h3>Tính năng đang được dần hoàn thiện</h3>
+  <div class="my-6 text-2xl">Luật cảnh sát biển Việt Nam</div>
+  <div class="carousel">
+    <div class="card" *ngFor="let car1 of carousel1">
+      <img
+        class="w-80 h-60 object-cover rounded-md"
+        [src]="'https://trueoutsourcing.com/' + car1.image"
+        alt=""
+      />
+      <div class="m-2" *ngFor="let top1 of car1.topics">{{ top1.content }}</div>
+      <button>Sửa card này</button>
+    </div>
+  </div>
+
+  <div class="my-6 text-2xl">Các câu hỏi khác</div>
+  <div class="carousel">
+    <div class="card" *ngFor="let car2 of carousel2">
+      <img
+        class="w-80 h-60 object-cover rounded-md"
+        [src]="'https://trueoutsourcing.com/' + car2.image"
+        alt=""
+      />
+      <div class="m-2" *ngFor="let top2 of car2.topics">{{ top2.content }}</div>
+      <button>Sửa card này</button>
+    </div>
+  </div>
 </div>

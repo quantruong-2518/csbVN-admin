@@ -1,0 +1,18 @@
+.carousel {
+  display: flex;
+  flex-wrap: wrap;
+
+  .card {
+    border: 1px solid #e5e7eb;
+    width: max-content;
+    border-radius: 5px;
+    margin: 0 0.5rem 0.5rem 0;
+
+    > button {
+      width: 100%;
+      background-color: #676f87;
+      color: white;
+      padding: 10px;
+    }
+  }
+}

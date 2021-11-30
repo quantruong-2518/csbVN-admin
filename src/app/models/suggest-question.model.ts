@@ -10,12 +10,15 @@ export interface ICarousel {
 
 export interface ICard {
   image: string;
+  type: number;
   topics: {
-    questions: Array<IQuestion>;
+    content: string;
+    questions: Array<any>;
   }[];
 }
 
 export interface IQuestion {
   title: string;
+  _id: string;
   answers?: Array<any>;
 }

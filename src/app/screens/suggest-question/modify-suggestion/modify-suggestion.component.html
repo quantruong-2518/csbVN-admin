@@ -1,0 +1,219 @@
+<div class="p-4">
+  <div class="tabs">
+    <!-- LABELS  -->
+    <div class="tab-labels flex justify-center py-4">
+      <div
+        (click)="currentTab = 'image'"
+        [class.active]="currentTab === 'image'"
+        class="tab-label1 mr-4 cursor-pointer"
+      >
+        Chọn ảnh
+      </div>
+      <div
+        (click)="currentTab = 'topic'"
+        [class.active]="currentTab === 'topic'"
+        class="tab-label2 mr-4 cursor-pointer"
+      >
+        Chọn chủ đề và câ câu hỏi
+      </div>
+      <div
+        (click)="currentTab = 'preview'"
+        [class.active]="currentTab === 'preview'"
+        class="tab-label3 mr-4 cursor-pointer"
+      >
+        Chọn slide
+      </div>
+    </div>
+
+    <!-- TAB: IMAGE  -->
+    <div class="tabs-content" [ngSwitch]="currentTab">
+      <div *ngSwitchCase="'image'" class="tab select-image">
+        <div class="my-6 text-2xl">Chọn thumbnail của card</div>
+        <div class="imgs flex flex-wrap">
+          <img
+            class="w-80 h-60 object-cover rounded-md my-4 mr-4"
+            *ngFor="let img of images"
+            [src]="'https://trueoutsourcing.com/' + img"
+            alt="img"
+            (click)="selectCardImage(img)"
+          />
+        </div>
+      </div>
+
+      <!-- TAB: TOPIC  -->
+      <div *ngSwitchCase="'topic'" class="tab create-topic">
+        <!-- TOPICS  -->
+        <div class="creation w-1/3">
+          <div class="my-6 flex items-center">
+            <div class="text-2xl mr-4">Chọn các chủ đề</div>
+            <select
+              (change)="setTopicQuantity($event.target.value)"
+              name="cars"
+              id="cars"
+            >
+              <option selected [value]="1">1</option>
+              <option [value]="2">2</option>
+              <option [value]="3">3</option>
+            </select>
+          </div>
+
+          <div (click)="setCurTopic(0)" class="topic flex mb-4">
+            <label for="topic1">Chủ đề 1</label>
+            <div class="topic1" id="topic1">
+              <div class="topic-content">
+                <input
+                  (keyup)="setContent($event.target.value, 0)"
+                  placeholder="Chủ đề của các câu hỏi"
+                  type="text"
+                />
+                <button>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="picked-question" *ngIf="getQuesByTopicIndex(0)">
+              <span> {{ getQuesByTopicIndex(0) }}</span>
+            </div>
+          </div>
+
+          <div
+            *ngIf="this.card.topics.length >= 2"
+            (click)="setCurTopic(1)"
+            class="topic flex mb-4"
+          >
+            <label for="topic2">Chủ đề 2</label>
+            <div class="topic2" id="topic2">
+              <div class="topic-content">
+                <input
+                  (keyup)="setContent($event.target.value, 1)"
+                  placeholder="Chủ đề của các câu hỏi"
+                  type="text"
+                />
+                <button>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="picked-question" *ngIf="getQuesByTopicIndex(1)">
+              <span> {{ getQuesByTopicIndex(1) }}</span>
+            </div>
+          </div>
+
+          <div
+            *ngIf="this.card.topics.length === 3"
+            (click)="setCurTopic(2)"
+            class="topic flex mb-4"
+          >
+            <label for="topic3">Chủ đề 3</label>
+            <div class="topic3" id="topic3">
+              <div class="topic-content">
+                <input
+                  (keyup)="setContent($event.target.value, 2)"
+                  placeholder="Chủ đề của các câu hỏi"
+                  type="text"
+                />
+                <button>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="picked-question" *ngIf="getQuesByTopicIndex(2)">
+              <span> {{ getQuesByTopicIndex(2) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUESTIONS  -->
+        <div class="question w-2/4">
+          <div class="my-6 text-2xl">
+            Chọn câu hỏi thuộc chủ đề {{ currentTopic + 1 }}
+          </div>
+
+          <div class="search-bar flex justify-between">
+            <input
+              class="mr-4"
+              (keyup)="searchQuestion($event.target.value)"
+              placeholder="Find question..."
+              type="text"
+              [(ngModel)]="questionKey"
+            />
+            <button>
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div
+            *ngIf="matchedQuestions.length; else questionNotFound"
+            class="question-container"
+          >
+            <div
+              class="flex items-center"
+              *ngFor="let question of matchedQuestions"
+            >
+              <input
+                (change)="selectQuestion(question)"
+                class="mr-2"
+                type="radio"
+                name=""
+              />
+              <span>{{ question.title }}</span>
+            </div>
+          </div>
+
+          <button
+            *ngIf="matchedQuestions.length"
+            class="py-2 px-4 bg-gray-400 rounded-md self-end"
+            (click)="addQuestionToTopic(currentTopic)"
+          >
+            Thêm câu hỏi
+          </button>
+
+          <ng-template #questionNotFound> Question not found </ng-template>
+
+          <button
+            (click)="currentTab = 'preview'"
+            class="
+              py-2
+              px-4
+              bg-blue-500
+              text-white
+              rounded-md
+              fixed
+              bottom-6
+              right-4
+            "
+          >
+            Bước tiếp theo
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB: PREVIEW  -->
+      <div *ngSwitchCase="'preview'" class="tab review-card">
+        <div class="my-6 flex items-center">
+          <div class="text-2xl mr-4">Chọn slide</div>
+          <select (change)="card.type = $event.target.value">
+            <option selected [value]="1">Luật cảnh sát biển Việt Nam</option>
+            <option [value]="2">Các thông tin khác</option>
+          </select>
+
+          <button
+            (click)="submitCard()"
+            class="
+              py-2
+              px-4
+              bg-blue-500
+              text-white
+              rounded-md
+              fixed
+              bottom-6
+              right-4
+            "
+          >
+            Hoàn tất
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
