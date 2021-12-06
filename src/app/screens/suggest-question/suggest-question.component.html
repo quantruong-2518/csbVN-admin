@@ -6,7 +6,7 @@
     Tạo thẻ mới</a
   >
 
-  <div class="my-6 text-2xl">Luật cảnh sát biển Việt Nam</div>
+  <div class="my-6 text-2xl section">Luật cảnh sát biển Việt Nam</div>
   <div class="carousel">
     <div class="card" *ngFor="let car1 of carousel1">
       <img
@@ -27,6 +27,7 @@
             text-center
             cursor-pointer
           "
+          [routerLink]="['/suggest-question/update', car1?._id]"
         >
           Sửa
         </a>
@@ -49,7 +50,7 @@
     </div>
   </div>
 
-  <div class="my-6 text-2xl">Các câu hỏi khác</div>
+  <div class="my-6 text-2xl section">Các câu hỏi khác</div>
   <div class="carousel">
     <div class="card" *ngFor="let car2 of carousel2">
       <img
@@ -70,6 +71,7 @@
             text-center
             cursor-pointer
           "
+          [routerLink]="['/suggest-question/update', car2?._id]"
         >
           Sửa
         </a>

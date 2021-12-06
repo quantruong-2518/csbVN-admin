@@ -15,6 +15,7 @@ export interface ICard {
     content: string;
     questions: Array<any>;
   }[];
+  _id: string;
 }
 
 export interface IQuestion {

@@ -23,6 +23,11 @@
           box-shadow: 1px 1px 1rem #888;
         }
       }
+
+      .selected {
+        border: 0.3rem solid #1796f0;
+        box-shadow: 1px 1px 7rem #839aab;
+      }
     }
 
     .create-topic {
@@ -42,9 +47,6 @@
             border-radius: 5px;
           }
         }
-      }
-
-      .selected-image {
       }
 
       .question {

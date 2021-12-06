@@ -30,8 +30,4 @@ export class QuestionService {
       `https://trueoutsourcing.com/api/v1/questions/search?q=${key}`
     );
   }
-
-  createCard(card: ICard): Observable<any> {
-    return this._http.post('https://trueoutsourcing.com/api/v1/cards', card);
-  }
 }
