@@ -12,17 +12,13 @@
       mr-4
     "
   >
-    <div class="chatting-screen border rounded-md p-4 mb-2">
+    <div class="chatting-screen border rounded-md p-4">
       <div
         *ngFor="let mes of messages; index as i; trackBy: trackByIndex"
         [class]="mes.isGuestReply ? 'guest-message' : 'admin-message'"
       >
         {{ mes.content }}
       </div>
-    </div>
-    <div class="chatting-bar border-t-2 px-4 py-2 flex justify-between">
-      <input class="py-2" type="text" placeholder="Say something..." />
-      <button>Send</button>
     </div>
   </div>
 
